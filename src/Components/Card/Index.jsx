@@ -14,7 +14,7 @@ const Card = (datos) => {
         event.stopPropagation()
         context.setCount(context.count + 1)
         context.setCartProducts([...context.cartProducts, productData])
-        context.openCheckoutSideMenu()
+        
     }
 
     const renderIcon = (id) => {
@@ -33,12 +33,6 @@ const Card = (datos) => {
             </div>
             )
         }
-        return (
-            <div className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full p-1"
-            onClick={(event) => addProductsToCart(event, datos.alt) }> 
-              <PlusIcon  className="text-black hover:bg-gray-300 rounded-lg shadow-lg" />
-            </div>
-        )
     }
     return (
     <div 

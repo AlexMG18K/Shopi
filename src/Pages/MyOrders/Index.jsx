@@ -1,31 +1,29 @@
-import {useContext} from 'react'
-import { ShoppingCartContext } from '../../Context/Index'
-import OrderCard from '../../Components/OrderCard/Index'
-import LayOut from "../../Components/Layout"
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { ShoppingCartContext } from "../../Context/Index";
+import LayOut from "../../Components/Layout";
+import OrderCards from '../../Components/OrdersCard/Index';
 
+function MyOrderss() {
+  const context = useContext(ShoppingCartContext);
 
-function MyOrders() {
-    const context = useContext(ShoppingCartContext)
-    
+  return (
+    <LayOut>
+      <div className="flex items-center w-80 justify-center py-5">
+        <h1 className="font-medium">My Orders</h1>
+      </div>
+      {
+        context.order.map((order, index) => {
+          return (
+            <Link key={index} to={`/my-orders/${index}`}>
+              <OrderCards
+                totalPrice={order.totalPrice}
+                totalProducts={order.totalProducts}
+              />
+            </Link>
+          )})}
+    </LayOut>
+  );
+}
 
-    return (
-        <LayOut>
-      My Orders
-      <div className='flex flex-col w-80'>
-        {
-            context.order.slice(-1)[0].products.map((product)=> (
-                <OrderCard
-                key = {product.id}
-                id={product.id}
-                title={product.title}
-                imageURL={product.image}
-                price={product.price}
-                />
-                ))
-            }
-            </div>
-        </LayOut>
-    )
-  }
-  
-  export default MyOrders
+export default MyOrderss;
